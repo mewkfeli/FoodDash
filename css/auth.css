@@ -1,0 +1,157 @@
+
+@font-face {
+    font-family: 'Open-Sans-SemiBold';
+    src: url('../fonts/OpenSans-SemiBold.ttf');
+}
+@font-face {
+    font-family: 'Open-Sans';
+    src: url('../fonts/OpenSans-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Open-Sans-Bold';
+    src: url('../fonts/OpenSans-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Open-Sans-Medium';
+    src: url('../fonts/OpenSans-Medium.ttf');
+}
+
+@font-face {
+    font-family: 'Lexend-Bold';
+    src: url('../fonts/Lexend-Bold.ttf');
+}
+
+:root {
+    --main-color: #FF6000;
+    --click-color: #FF9E00;
+    --gray: #939393;
+    --dark-gray: #2A2A2A;
+}
+* {
+    margin: 0;
+    padding: 0;
+    color: var(--dark-gray);
+    overflow: hidden;
+}
+.photo-left img {
+    overflow: hidden;
+    width: 600px;
+}
+.right-container {
+    margin-left: 100px;
+    margin-top: 40px;
+}
+.auth-container {
+    display: flex;
+}
+
+.text h1 {
+    font-family: 'Open-Sans-Bold';
+    font-size: 34px;
+}
+
+.button-auth button {
+    font-family: 'Open-Sans-Medium';
+    font-size: 12px;
+    background-color: white;
+    height: 60px;
+    width: 220px;
+    border-radius: 8px;
+    border: 0.83px solid var(--gray);
+    margin-top: 35px;
+}
+
+form {
+    margin-top: 45px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container label {
+    font-size: 13px;
+    font-family: 'Open-Sans';
+    color: var(--gray);
+}
+
+form input {
+    font-family: 'Open-Sans-SemiBold';
+    width: 372px;
+    outline: none;
+    font-size: 20px;
+    border-spacing: 20px;
+    border: none;
+    border-bottom: solid 0.83px var(--gray);
+}
+
+.email-container, .pass-container, .username-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.pass-container, .email-container  {
+    margin-top: 45px;
+}
+
+form button {
+    font-family: 'Lexend-Bold';
+    font-size: 20px;
+    color: white;
+    margin-top: 45px;
+    background-color: var(--main-color);
+    border: none;
+    border-radius: 50px;
+    width: 407px;
+    height: 70px;
+}
+
+form p {
+    margin-top: 45px;
+    font-family: 'Open-Sans';
+    font-size: 13px;
+}
+form span {
+    color: var(--main-color);
+    font-family: 'Open-Sans-Bold';
+}
+
+a {
+    text-decoration: none;
+}
+
+button img {
+    width: 25px;
+    height: 24px;
+}
+
+.button-auth {
+    display: flex;
+    column-gap: 21px;
+
+}
+.button-auth button {
+    gap: 5px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: center;
+    align-items: center;
+}
+
+.or {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 20px;
+    font-family: 'Open-Sans';
+    color: var(--gray);
+}
+
+form button:hover {
+    background-color: var(--click-color);
+}
+
+button {
+    cursor: pointer;
+}
