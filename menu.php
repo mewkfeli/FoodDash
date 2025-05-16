@@ -1,3 +1,10 @@
+<?php
+session_start();
+$isAuth = isset($_SESSION['user']);
+$user = $isAuth ? $_SESSION['user'] : null;
+require_once "connect-db.php";
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -22,7 +29,8 @@
                 </ul>
             </nav>
             <div class="button-header">
-                <a href="#" aria-label="Search">
+
+            <a class="btn-header-a" href="#" aria-label="Search">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                         <path
                             d="M14.3333 14.3333L21 21M8.77778 16.5556C4.48223 16.5556 1 13.0733 1 8.77778C1 4.48223 4.48223 1 8.77778 1C13.0733 1 16.5556 4.48223 16.5556 8.77778C16.5556 13.0733 13.0733 16.5556 8.77778 16.5556Z"
@@ -30,9 +38,57 @@
                         </path>
                     </svg>
                 </a>
-                <a href="authorization.php" aria-label="User Profile" style="width: 50px; height: 50px;">
-                    <img src="../resources/user.svg" alt="Фото пользователя">
-                </a>
+                <?php if($isAuth): ?>
+                <!-- Для авторизованных - ссылка на профиль -->
+                    <a href="profile.php" class="profile-link">
+                        <img src="<?= !empty($user['avatar']) ? $user['avatar'] : '../resources/user.svg' ?>" alt="Profile">
+                    </a>
+                <?php else: ?>
+                    <!-- Для гостей - кнопка входа -->
+                    <button id="myBtn"><img src="../resources/user.svg" alt="Login"></button>
+                <?php endif; ?>
+                <div id="myModal" class="modal" style="display: none;">
+                                        <!-- Модальное -->
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <div class="auth-container">
+                            <section class="header-container">
+                                <img src="..\resources\background_auth.png" alt="Картинка слева">
+                            </section>
+                            <section class="right-container">
+                                <div class="logo-header">
+                                    <img src="../resources/logo.svg" alt="Логотип FoodDash">
+                                </div>
+                                <div class="text">
+                                    <h1>Login to your account!</h1>
+                                </div>
+                                <div class="button-auth">
+                                    <button><img src="..\resources\google.svg" alt="google logo"> Login with
+                                        Google</button>
+                                    <button><img src="..\resources\facebook.svg" alt="facebook logo"> Login with
+                                        Facebook</button>
+                                </div>
+                                <div class="form-container">
+                                    <form action="signIn-db.php" method="POST" class="block-signIn">
+                                        <div class="email-container">
+                                            <label for="email">Email Address</label><br>
+                                            <input name="email" type="email" id="email" required>
+                                        </div>
+                                        <div class="pass-container">
+                                            <label for="pass">Password</label><br>
+                                            <input name="pass" type="password" id="pass" required>
+                                            <button type="submit">Login To Continue</button>
+                                            <div class="sign-up-container"><p>Don't have an account? <a href="registration.php"><span class="dont-have">Sign
+                                                up</span></a></p></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
         </div>
     </header>
@@ -231,5 +287,47 @@
             </div>
         </div>
     </footer>
+     <script>
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("myBtn");
+        var span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function () {
+            modal.style.display = "block";
+            setTimeout(function () {
+                modal.classList.add("show");
+            }, 10);
+        }
+
+        span.onclick = function () {
+            modal.classList.remove("show");
+            setTimeout(function () {
+                modal.style.display = "none";
+            }, 300);
+        }
+
+    </script>
+     <script>
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("myBtn");
+        var span = document.getElementsByClassName("close")[0];
+
+        // Показываем модальное окно только если кнопка существует (для гостей)
+        if(btn) {
+            btn.onclick = function() {
+                modal.style.display = "block";
+                setTimeout(function() {
+                    modal.classList.add("show");
+                }, 10);
+            }
+        }
+
+        span.onclick = function() {
+            modal.classList.remove("show");
+            setTimeout(function() {
+                modal.style.display = "none";
+            }, 300);
+        }
+</script>
 </body>
 </html>
